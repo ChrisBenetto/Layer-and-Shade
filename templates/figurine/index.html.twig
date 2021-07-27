@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Figurine index{% endblock %}
+
+{% block body %}
+    <h1>Figurine index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Create_at</th>
+                <th>Upvote</th>
+                <th>Downvote</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for figurine in figurines %}
+            <tr>
+                <td>{{ figurine.id }}</td>
+                <td>{{ figurine.name }}</td>
+                <td>{{ figurine.createAt ? figurine.createAt|date('Y-m-d') : '' }}</td>
+                <td>{{ figurine.upvote }}</td>
+                <td>{{ figurine.downvote }}</td>
+                <td>
+                    <a href="{{ path('figurine_show', {'id': figurine.id}) }}">show</a>
+                    <a href="{{ path('figurine_edit', {'id': figurine.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('figurine_new') }}">Create new</a>
+{% endblock %}
