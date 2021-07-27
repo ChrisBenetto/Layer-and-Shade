@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Figurine;
-use App\Form\Figurine1Type;
+use App\Form\FigurineType;
 use App\Repository\FigurineRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class FigurineController extends AbstractController
     public function new(Request $request): Response
     {
         $figurine = new Figurine();
-        $form = $this->createForm(Figurine1Type::class, $figurine);
+        $form = $this->createForm(FigurineType::class, $figurine);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +53,7 @@ class FigurineController extends AbstractController
     #[Route('/{id}/edit', name: 'figurine_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Figurine $figurine): Response
     {
-        $form = $this->createForm(Figurine1Type::class, $figurine);
+        $form = $this->createForm(FigurineType::class, $figurine);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -71,7 +71,7 @@ class FigurineController extends AbstractController
     #[Route('/{id}', name: 'figurine_delete', methods: ['POST'])]
     public function delete(Request $request, Figurine $figurine): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$figurine->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $figurine->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($figurine);
             $entityManager->flush();

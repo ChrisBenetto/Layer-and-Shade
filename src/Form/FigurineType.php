@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class Figurine1Type extends AbstractType
+class FigurineType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -17,8 +17,7 @@ class Figurine1Type extends AbstractType
             ->add('upvote')
             ->add('downvote')
             ->add('owner')
-            ->add('category')
-        ;
+            ->add('category');
     }
 
     public function configureOptions(OptionsResolver $resolver)
