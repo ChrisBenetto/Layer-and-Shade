@@ -2,29 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\Figurine;
+use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class Figurine1Type extends AbstractType
+class CommentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('content')
             ->add('create_at')
-            ->add('upvote')
-            ->add('downvote')
-            ->add('owner')
-            ->add('category')
+            ->add('author')
+            ->add('figurine')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Figurine::class,
+            'data_class' => Comment::class,
         ]);
     }
 }

@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\PictureRepository;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PictureRepository::class)
+ * @ORM\Entity(repositoryClass=CommentRepository::class)
  */
-class Picture
+class Comment
 {
     /**
      * @ORM\Id
@@ -18,9 +18,9 @@ class Picture
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
-    private $url;
+    private $content;
 
     /**
      * @ORM\Column(type="date")
@@ -28,7 +28,13 @@ class Picture
     private $create_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Figurine::class, inversedBy="pictures")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Figurine::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $figurine;
@@ -38,14 +44,14 @@ class Picture
         return $this->id;
     }
 
-    public function getUrl(): ?string
+    public function getContent(): ?string
     {
-        return $this->url;
+        return $this->content;
     }
 
-    public function setUrl(string $url): self
+    public function setContent(string $content): self
     {
-        $this->url = $url;
+        $this->content = $content;
 
         return $this;
     }
@@ -58,6 +64,18 @@ class Picture
     public function setCreateAt(\DateTimeInterface $create_at): self
     {
         $this->create_at = $create_at;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
