@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Picture;
 use App\Entity\Figurine;
+use App\Entity\User;
 use App\Form\FigurineType;
 use App\Repository\FigurineRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('app/figurine')]
 class FigurineController extends AbstractController
@@ -29,7 +31,25 @@ class FigurineController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $pictures = $form->get('pictures')->getData();
+
+            foreach ($pictures as $picture) {
+                $pictureInRepo = md5(uniqid()) . '.' . $picture->guessExtension();
+                $picture->move(
+                    $this->getParameter('images_directory'),
+                    $pictureInRepo
+                );
+                $img = new Picture();
+                $img->setCreateAt(new \DateTime());
+                $img->setUrl($pictureInRepo);
+                $img->setFigurine($figurine);
+            }
             $figurine->setCreateAt(new \DateTime());
+            /*
+            Définir le propriétaire de la figurine TODO
+            
+            $figurine->setOwner(User::$owner);
+            */
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($figurine);
             $entityManager->flush();
