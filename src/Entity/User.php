@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface
 {
@@ -52,10 +53,6 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
 
     /**
      * @ORM\OneToMany(targetEntity=Figurine::class, mappedBy="owner", orphanRemoval=true)
@@ -157,7 +154,8 @@ class User implements UserInterface
     }
     public function getRoles()
     {
-        return array('ROLE_USER');
+        $roles[] = 'ROLE_USER';
+        return $roles;
     }
 
     public function eraseCredentials()

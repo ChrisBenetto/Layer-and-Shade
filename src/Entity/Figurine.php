@@ -61,6 +61,11 @@ class Figurine
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
@@ -200,6 +205,18 @@ class Figurine
                 $comment->setFigurine(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

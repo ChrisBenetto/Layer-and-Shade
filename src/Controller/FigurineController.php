@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/figurine')]
+#[Route('app/figurine')]
 class FigurineController extends AbstractController
 {
     #[Route('/', name: 'figurine_index', methods: ['GET'])]
@@ -29,6 +29,7 @@ class FigurineController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $figurine->setCreateAt(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($figurine);
             $entityManager->flush();

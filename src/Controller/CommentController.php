@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/comment')]
+#[Route('app/comment')]
 class CommentController extends AbstractController
 {
     #[Route('/', name: 'comment_index', methods: ['GET'])]
@@ -71,7 +71,7 @@ class CommentController extends AbstractController
     #[Route('/{id}', name: 'comment_delete', methods: ['POST'])]
     public function delete(Request $request, Comment $comment): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($comment);
             $entityManager->flush();

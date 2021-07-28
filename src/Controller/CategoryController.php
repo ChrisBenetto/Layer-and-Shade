@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/category')]
+#[Route('app/category')]
 class CategoryController extends AbstractController
 {
     #[Route('/', name: 'category_index', methods: ['GET'])]
@@ -71,7 +71,7 @@ class CategoryController extends AbstractController
     #[Route('/{id}', name: 'category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($category);
             $entityManager->flush();
