@@ -1,41 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Figurine index{% endblock %}
+{% block title %}Les figurines
+{% endblock %}
 
 {% block body %}
-    <h1>Figurine index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Create_at</th>
-                <th>Upvote</th>
-                <th>Downvote</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for figurine in figurines %}
-            <tr>
-                <td>{{ figurine.id }}</td>
-                <td>{{ figurine.name }}</td>
-                <td>{{ figurine.createAt ? figurine.createAt|date('Y-m-d') : '' }}</td>
-                <td>{{ figurine.upvote }}</td>
-                <td>{{ figurine.downvote }}</td>
-                <td>
-                    <a href="{{ path('figurine_show', {'id': figurine.id}) }}">show</a>
-                    <a href="{{ path('figurine_edit', {'id': figurine.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('figurine_new') }}">Create new</a>
+	<h1>Decouvrer les figurines</h1>
+	{% for figurine in figurines %}
+		<div class="card" style="width: 18rem;">
+			{% for picture in figurine.pictures %}
+				<img src="/uploads/{{ picture.url }}" class="card-img-top" alt="...">
+			{% endfor %}
+			<div class="card-body">
+				<h4 class="card-title">{{ figurine.name }}</h4>
+				<h5 class="card-title">{{ figurine.owner.username }}</h5>
+				<h6 class="card-title">{{ figurine.category.name }}</h5>
+				{{ figurine.createAt ? figurine.createAt|date('Y-m-d') : '' }}
+				<p class="card-text">{{ figurine.description }}</p>
+			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">{{ figurine.upvote }}</li>
+				<li class="list-group-item">{{ figurine.downvote }}</li>
+			</ul>
+			<div class="card-body">
+				<a href="{{ path('figurine_show', {'id': figurine.id}) }}">Detail</a>
+			</div>
+		</div>
+	{% endfor %}
 {% endblock %}

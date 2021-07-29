@@ -7,6 +7,8 @@ use App\Entity\Figurine;
 use App\Entity\User;
 use App\Form\FigurineType;
 use App\Repository\FigurineRepository;
+use App\Repository\PictureRepository;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,6 +28,7 @@ class FigurineController extends AbstractController
     #[Route('/new', name: 'figurine_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
         $figurine = new Figurine();
         $form = $this->createForm(FigurineType::class, $figurine);
         $form->handleRequest($request);
@@ -44,12 +47,10 @@ class FigurineController extends AbstractController
                 $img->setUrl($pictureInRepo);
                 $img->setFigurine($figurine);
             }
+
             $figurine->setCreateAt(new \DateTime());
-            /*
-            Définir le propriétaire de la figurine TODO
-            
-            $figurine->setOwner(User::$owner);
-            */
+            $figurine->setOwner($user);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($figurine);
             $entityManager->flush();
