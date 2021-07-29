@@ -46,6 +46,8 @@ class FigurineController extends AbstractController
                 $img->setCreateAt(new \DateTime());
                 $img->setUrl($pictureInRepo);
                 $img->setFigurine($figurine);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($img);
             }
 
             $figurine->setCreateAt(new \DateTime());
