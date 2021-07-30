@@ -13,7 +13,7 @@
 		<div class="card-body">
 			<h4 class="card-title">{{ figurine.name }}</h4>
 			<h5 class="card-title">{{ figurine.owner.username }}</h5>
-			<h6 class="card-title">{{ figurine.category.name }}</h5>
+			<h6 class="card-title">{{ figurine.category.name }}</h6>
 			{{ figurine.createAt ? figurine.createAt|date('Y-m-d') : '' }}
 			{% if figurine.createAt|date('Y-m-d') == "now"|date('Y-m-d') %}
 				<span class="badge bg-secondary">New</span>
@@ -29,6 +29,6 @@
 		<li class="list-group-item">{{ figurine.downvote }}</li>
 	</ul>
 	<div class="card-body">
-		<a href="{{ path('figurine_show', {'id': figurine.id}) }}">Detail</a>
+		<a href="{{ path('figurine_show', {'id': figurine.id}) }}">Voir plus</a>
 	</div>
 </div>{% endfor %}{% endblock %}

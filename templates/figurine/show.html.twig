@@ -1,38 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Figurine{% endblock %}
+{% block title %}Figurine
+{% endblock %}
 
 {% block body %}
-    <h1>Figurine</h1>
+	<h1>Figurine</h1>
+	<a href="{{ path('figurine_index') }}">Retour</a>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ figurine.id }}</td>
+			</tr>
+			<tr>
+				<th>Nom</th>
+				<td>{{ figurine.name }}</td>
+			</tr>
+			<tr>
+				<th>Posté le
+				</th>
+				<td>{{ figurine.createAt ? figurine.createAt|date('Y-m-d') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Auteur</th>
+				<td>{{ figurine.owner.username }}</td>
+			</tr>
+			<tr>
+				<th>Categorie</th>
+				<td>{{ figurine.category.name }}</td>
+			</tr>
+			<tr>
+				<th>Votes positifs</th>
+				<td>{{ figurine.upvote }}</td>
+			</tr>
+			<tr>
+				<th>Votes negatifs</th>
+				<td>{{ figurine.downvote }}</td>
+			</tr>
+		</tbody>
+	</table>
+	{% for picture in figurine.pictures %}
+		<img src="/uploads/{{ picture.url }}" width="200" class="card-img-top" alt="...">
+	{% endfor %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ figurine.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ figurine.name }}</td>
-            </tr>
-            <tr>
-                <th>Create_at</th>
-                <td>{{ figurine.createAt ? figurine.createAt|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Upvote</th>
-                <td>{{ figurine.upvote }}</td>
-            </tr>
-            <tr>
-                <th>Downvote</th>
-                <td>{{ figurine.downvote }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('figurine_index') }}">back to list</a>
-
-    <a href="{{ path('figurine_edit', {'id': figurine.id}) }}">edit</a>
-
-    {{ include('figurine/_delete_form.html.twig') }}
 {% endblock %}
