@@ -30,17 +30,31 @@
 				<td>{{ figurine.category.name }}</td>
 			</tr>
 			<tr>
+				<th>Description</th>
+				<td>{{ figurine.description }}</td>
+			</tr>
+
+			<tr>
 				<th>Votes positifs</th>
-				<td>{{ figurine.upvote }}</td>
+				<td>{{ figurine.upvote|length }}</td>
 			</tr>
 			<tr>
 				<th>Votes negatifs</th>
-				<td>{{ figurine.downvote }}</td>
+				<td>{{ figurine.downvote|length }}</td>
 			</tr>
 		</tbody>
 	</table>
+	<h2>Galerie d'images :</h2>
 	{% for picture in figurine.pictures %}
 		<img src="/uploads/{{ picture.url }}" width="200" class="card-img-top" alt="...">
+	{% endfor %}
+	<h2>Les commentaires (
+		{{ figurine.comments|length }}
+		) :</h2>
+	{% for comment in figurine.comments %}
+		<h4>{{ comment.author.username }}</h4>
+		<h5>{{ comment.createAt ? comment.createAt|date('Y-m-d') : '' }}</h5>
+		<p>{{ comment.content }}</p>
 	{% endfor %}
 
 

@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Figurine{% endblock %}
+{% block title %}New Figurine
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Figurine</h1>
+	<h1>Publication d'une figurine</h1>
 
-    {{ include('figurine/_form.html.twig') }}
+	{{ include('figurine/_form.html.twig') }}
 
-    <a href="{{ path('figurine_index') }}">back to list</a>
+	<a href="{{ path('figurine_index') }}">Retour</a>
 {% endblock %}

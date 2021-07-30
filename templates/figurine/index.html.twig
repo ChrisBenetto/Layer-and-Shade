@@ -24,9 +24,9 @@
 	</div>
 	<ul class="list-group list-group-flush">
 		<li class="list-group-item">
-			<i class="bi bi-alarm"></i>
-			{{ figurine.upvote }}</li>
-		<li class="list-group-item">{{ figurine.downvote }}</li>
+			{{ figurine.upvote|length }}</li>
+		<li class="list-group-item">{{ figurine.downvote|length }}</li>
+		<li class="list-group-item">{{ figurine.comments|length }}</li>
 	</ul>
 	<div class="card-body">
 		<a href="{{ path('figurine_show', {'id': figurine.id}) }}">Voir plus</a>
