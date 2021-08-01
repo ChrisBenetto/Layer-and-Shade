@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Entity\Comment;
 use App\Entity\Picture;
 use App\Entity\Figurine;
-use App\Entity\User;
+use App\Form\CommentType;
 use App\Form\FigurineType;
-use App\Repository\FigurineRepository;
-use App\Repository\PictureRepository;
 use Doctrine\ORM\Mapping\Id;
+use App\Repository\PictureRepository;
+use App\Repository\FigurineRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -71,6 +73,35 @@ class FigurineController extends AbstractController
     {
         return $this->render('figurine/show.html.twig', [
             'figurine' => $figurine,
+        ]);
+    }
+
+
+    #[Route('/{id}/comment', name: 'comment_new', methods: ['GET', 'POST'])]
+    public function newComment(Request $request, FigurineRepository $figurineRepository): Response
+    {
+        $comment = new Comment();
+        $user = $this->getUser();
+        $figurineId = $request->attributes->get('id');
+        $figurine = $figurineRepository->find($figurineId);
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setCreateAt(new \DateTime());
+            $comment->setAuthor($user);
+            $comment->setFigurine($figurine);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('figurine_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('comment/new.html.twig', [
+            'comment' => $comment,
+            'form' => $form,
         ]);
     }
 

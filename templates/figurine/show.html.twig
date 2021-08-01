@@ -50,7 +50,9 @@
 	{% endfor %}
 	<h2>Les commentaires (
 		{{ figurine.comments|length }}
-		) :</h2>
+		) :
+	</h2>
+	<a href="{{ path('comment_new', {'id': figurine.id}) }}">Ajouter un commentaire</a>
 	{% for comment in figurine.comments %}
 		<h4>{{ comment.author.username }}</h4>
 		<h5>{{ comment.createAt ? comment.createAt|date('Y-m-d') : '' }}</h5>
