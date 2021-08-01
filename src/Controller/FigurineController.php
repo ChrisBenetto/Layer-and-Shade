@@ -76,6 +76,47 @@ class FigurineController extends AbstractController
         ]);
     }
 
+    /* TEST DES FONCTIONNALITES UPVOTE ET DOWNVOTE */
+
+    #[Route('/{id}/upvote', name: 'figurine_upvote', methods: ['GET'])]
+    public function upvote(Request $request, FigurineRepository $figurineRepository): Response
+    {
+        $figurineId = $request->attributes->get('id');
+        $figurine = $figurineRepository->find($figurineId);
+        $upvote = $figurine->getUpvote();
+        $upvote++;
+        $figurine->setUpvote($upvote);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($figurine);
+        $entityManager->flush();
+
+        return $this->render('figurine/index.html.twig', [
+            'figurines' => $figurineRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/{id}/downvote', name: 'figurine_downvote', methods: ['GET'])]
+    public function downvote(Request $request, FigurineRepository $figurineRepository): Response
+    {
+        $figurineId = $request->attributes->get('id');
+        $figurine = $figurineRepository->find($figurineId);
+        $downvote = $figurine->getDownvote();
+        $downvote++;
+        $figurine->setDownvote($downvote);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($figurine);
+        $entityManager->flush();
+
+        return $this->render('figurine/index.html.twig', [
+            'figurines' => $figurineRepository->findAll(),
+        ]);
+    }
+
+
+    /* END */
+
 
     #[Route('/{id}/comment', name: 'comment_new', methods: ['GET', 'POST'])]
     public function newComment(Request $request, FigurineRepository $figurineRepository): Response

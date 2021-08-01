@@ -24,9 +24,14 @@
 	</div>
 	<ul class="list-group list-group-flush">
 		<li class="list-group-item">
-			{{ figurine.upvote|length }}</li>
-		<li class="list-group-item">{{ figurine.downvote|length }}</li>
-		<li class="list-group-item">{{ figurine.comments|length }}</li>
+			{{ figurine.upvote|length }}
+			<a href="{{ path('figurine_upvote', {'id': figurine.id}) }}">Vote positif</a>
+		</li>
+		<li class="list-group-item">{{ figurine.downvote|length }}
+			<a href="{{ path('figurine_downvote', {'id': figurine.id}) }}">Vote négatif</a>
+		</li>
+		<li class="list-group-item">{{ figurine.comments|length }}
+		</li>
 	</ul>
 	<div class="card-body">
 		<a href="{{ path('figurine_show', {'id': figurine.id}) }}">Voir plus</a>
