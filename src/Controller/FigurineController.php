@@ -114,10 +114,6 @@ class FigurineController extends AbstractController
         ]);
     }
 
-
-    /* END */
-
-
     #[Route('/{id}/comment', name: 'comment_new', methods: ['GET', 'POST'])]
     public function newComment(Request $request, FigurineRepository $figurineRepository): Response
     {
