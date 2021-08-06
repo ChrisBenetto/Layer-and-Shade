@@ -40,6 +40,11 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = ["ROLE_USER"];
+
+    /**
      * @ORM\Column(type="date")
      */
     private $create_at;
@@ -152,10 +157,13 @@ class User implements UserInterface
 
         return null;
     }
-    public function getRoles()
+    public function getRoles(): array
     {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
-        return $roles;
+
+        return array_unique($roles);
     }
 
     public function eraseCredentials()

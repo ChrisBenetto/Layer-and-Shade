@@ -17,6 +17,16 @@ class BlogController extends AbstractController
             'controller_name' => 'BlogController',
         ]);
     }
+
+    /* TEST ADMIN */
+    #[Route('/admin', name: 'admin')]
+    public function admin(): Response
+    {
+        return $this->render('blog/index.html.twig', [
+            'controller_name' => 'BlogController',
+        ]);
+    }
+    /* */
     #[Route('/app', name: 'index')]
     public function index(): Response
     {
