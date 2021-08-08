@@ -76,8 +76,6 @@ class FigurineController extends AbstractController
         ]);
     }
 
-    /* TEST DES FONCTIONNALITES UPVOTE ET DOWNVOTE */
-
     #[Route('/{id}/upvote', name: 'figurine_upvote', methods: ['GET'])]
     public function upvote(Request $request, FigurineRepository $figurineRepository): Response
     {

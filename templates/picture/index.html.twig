@@ -1,28 +1,28 @@
 {% extends 'baseAdmin.html.twig' %}
 
-{% block title %}Comment index
+{% block title %}Picture index
 {% endblock %}
 
 {% block body %}
-	<h1>Comment index</h1>
+	<h1>Picture index</h1>
 
 	<table class="table">
 		<thead>
 			<tr>
 				<th>Id</th>
-				<th>Content</th>
+				<th>Url</th>
 				<th>Create_at</th>
 				<th>actions</th>
 			</tr>
 		</thead>
 		<tbody>
-			{% for comment in comments %}
+			{% for picture in pictures %}
 				<tr>
-					<td>{{ comment.id }}</td>
-					<td>{{ comment.content }}</td>
-					<td>{{ comment.createAt ? comment.createAt|date('Y-m-d') : '' }}</td>
+					<td>{{ picture.id }}</td>
+					<td>{{ picture.url }}</td>
+					<td>{{ picture.createAt ? picture.createAt|date('Y-m-d') : '' }}</td>
 					<td>
-						<a href="{{ path('comment_edit', {'id': comment.id}) }}">edit</a>
+						<a href=""></a>
 					</td>
 				</tr>
 			{% else %}
