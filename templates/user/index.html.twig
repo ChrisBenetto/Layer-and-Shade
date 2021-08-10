@@ -1,23 +1,24 @@
 {% extends 'baseAdmin.html.twig' %}
 
-{% block title %}User index
+{% block title %}Modération des utilisateurs
 {% endblock %}
 
 {% block body %}
-	<h1>User index</h1>
+	<h1>Utilisateurs</h1>
 
 	<table class="table">
 		<thead>
 			<tr>
 				<th>Id</th>
-				<th>Username</th>
+				<th>Pseudo</th>
 				<th>Email</th>
-				<th>Password</th>
+				<th>Nombre de figurines</th>
+				<th>Nombre de commentaires</th>
 				<th>Roles</th>
-				<th>Create_at</th>
-				<th>Update_at</th>
+				<th>Crée le</th>
+				<th>Modifié le </th>
 				<th>Avatar</th>
-				<th>actions</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -26,18 +27,20 @@
 					<td>{{ user.id }}</td>
 					<td>{{ user.username }}</td>
 					<td>{{ user.email }}</td>
-					<td>{{ user.password }}</td>
+					<td>{{ user.figurines|length  }}</td>
+					<td>{{ user.comments|length }}</td>
 					<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
 					<td>{{ user.createAt ? user.createAt|date('Y-m-d') : '' }}</td>
 					<td>{{ user.updateAt ? user.updateAt|date('Y-m-d') : '' }}</td>
 					<td>{{ user.avatar }}</td>
 					<td>
-						<a href=""></a>
+						<a href="">Suppression Utilisateur</a>
+						<a href="">Gestion des Rôles</a>
 					</td>
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="9">no records found</td>
+					<td colspan="9">Pas d'enregistrements</td>
 				</tr>
 			{% endfor %}
 		</tbody>
