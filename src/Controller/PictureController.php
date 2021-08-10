@@ -13,15 +13,21 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/picture')]
 class PictureController extends AbstractController
 {
-    #[Route('/{id}', name: 'picture_delete', methods: ['POST'])]
-    public function delete(Request $request, Picture $picture): Response
+    #[Route('/{id}/edit', name: 'picture_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Picture $picture): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $picture->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($picture);
-            $entityManager->flush();
+        $form = $this->createForm(PictureType::class, $picture);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('picture_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->redirectToRoute('picture_index', [], Response::HTTP_SEE_OTHER);
+        return $this->renderForm('comment/edit.html.twig', [
+            'picture' => $picture,
+            'form' => $form,
+        ]);
     }
 }

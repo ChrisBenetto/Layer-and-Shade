@@ -19,10 +19,10 @@
 			{% for picture in pictures %}
 				<tr>
 					<td>{{ picture.id }}</td>
-					<td>{{ picture.url }}</td>
+					<td><img src="/uploads/{{ picture.url }}" class="img-thumbnail" alt="..."></td>
 					<td>{{ picture.createAt ? picture.createAt|date('Y-m-d') : '' }}</td>
 					<td>
-						<a href=""></a>
+						<a href="{{ path('picture_delete', {'id': picture.id}) }}">Supprimer</a>
 					</td>
 				</tr>
 			{% else %}

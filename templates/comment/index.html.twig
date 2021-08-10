@@ -4,25 +4,27 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Comment index</h1>
+	<h1>Commentaires</h1>
 
 	<table class="table">
 		<thead>
 			<tr>
 				<th>Id</th>
-				<th>Content</th>
-				<th>Create_at</th>
-				<th>actions</th>
+				<th>Contenu</th>
+				<th>Auteur</th>
+				<th>Publié le :</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for comment in comments %}
 				<tr>
 					<td>{{ comment.id }}</td>
+					<td>{{ comment.author.username }}</td>
 					<td>{{ comment.content }}</td>
 					<td>{{ comment.createAt ? comment.createAt|date('Y-m-d') : '' }}</td>
 					<td>
-						<a href="{{ path('comment_edit', {'id': comment.id}) }}">edit</a>
+						<a href="{{ path('comment_delete', {'id': comment.id}) }}">Supprimer</a>
 					</td>
 				</tr>
 			{% else %}
