@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Figurine{% endblock %}
+{% block title %}Modification d'une publication{% endblock %}
 
 {% block body %}
-    <h1>Edit Figurine</h1>
+    <h1>Editer la publication</h1>
 
-    {{ include('figurine/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('figurine/_form.html.twig', {'button_label': 'Modifier'}) }}
+    {{ include('figurine/_delete_form.html.twig', {'button_label': 'Suppression'}) }}
+    <a href="{{ path('figurine_index') }}">Retour</a>
 
-    <a href="{{ path('figurine_index') }}">back to list</a>
-
-    {{ include('figurine/_delete_form.html.twig') }}
+    
 {% endblock %}

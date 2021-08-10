@@ -24,10 +24,10 @@
 	</div>
 	<ul class="list-group list-group-flush">
 		<li class="list-group-item">
-			{{ figurine.upvote|length }}
+			{{ figurine.upvote }}
 			<a href="{{ path('figurine_upvote', {'id': figurine.id}) }}">Vote positif</a>
 		</li>
-		<li class="list-group-item">{{ figurine.downvote|length }}
+		<li class="list-group-item">{{ figurine.downvote }}
 			<a href="{{ path('figurine_downvote', {'id': figurine.id}) }}">Vote négatif</a>
 		</li>
 		<li class="list-group-item">{{ figurine.comments|length }}
