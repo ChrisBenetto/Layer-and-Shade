@@ -8,6 +8,7 @@ use App\Entity\Picture;
 use App\Entity\Figurine;
 use App\Form\CommentType;
 use App\Form\FigurineType;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping\Id;
 use App\Repository\PictureRepository;
 use App\Repository\FigurineRepository;
@@ -20,10 +21,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class FigurineController extends AbstractController
 {
     #[Route('/', name: 'figurine_index', methods: ['GET'])]
-    public function index(FigurineRepository $figurineRepository): Response
+    public function index(FigurineRepository $figurineRepository, CategoryRepository $categoryRepository): Response
     {
         return $this->render('figurine/index.html.twig', [
             'figurines' => $figurineRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
         ]);
     }
 

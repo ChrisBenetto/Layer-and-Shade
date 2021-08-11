@@ -4,9 +4,12 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Publication d'une figurine</h1>
+	<div class="container">
+		<h1>Publication d'une figurine</h1>
 
-	{{ include('figurine/_form.html.twig') }}
 
-	<a href="{{ path('figurine_index') }}">Retour</a>
+		{{ include('figurine/_form.html.twig') }}
+
+		<a href="{{ path('figurine_index') }}">Retour</a>
+	</div>
 {% endblock %}
