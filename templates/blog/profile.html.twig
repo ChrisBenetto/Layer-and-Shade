@@ -9,6 +9,10 @@
 	{{ app.user.email }}</h2>
 <h4>Avatar :
 	{{ app.user.avatar }}</h4>
+<form action="" method="POST">
+	<input type="file">
+	<button type="submit">Modifier</button>
+</form>
 <h5>Mes figurines (
 	{{ app.user.figurines|length }}
 	) :</h5>

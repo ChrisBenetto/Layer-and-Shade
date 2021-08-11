@@ -4,36 +4,74 @@
 {% endblock %}
 
 {% block body %}
-<h1>Decouvrer les figurines</h1>
-{% for figurine in figurines %}
-	<div class="card" style="width: 18rem;">
-		{% for picture in figurine.pictures|slice(0, 1) %}
-			<img src="/uploads/{{ picture.url }}" class="card-img-top" alt="...">
-		{% endfor %}
-		<div class="card-body">
-			<h4 class="card-title">{{ figurine.name }}</h4>
-			<h5 class="card-title">{{ figurine.owner.username }}</h5>
-			<h6 class="card-title">{{ figurine.category.name }}</h6>
-			{{ figurine.createAt ? figurine.createAt|date('Y-m-d') : '' }}
-			{% if figurine.createAt|date('Y-m-d') == "now"|date('Y-m-d') %}
-				<span class="badge bg-secondary">New</span>
-			</h4>
-		{% endif %}
+	<div class="container-fluid d-flex justify-content-around mt-3">
+		<div class="col-2">
+			<fieldset class="form-group">
+				<legend class="mt-4">Univers</legend>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					<label class="form-check-label" for="flexCheckDefault">
+						Default checkbox
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="">
+					<label class="form-check-label" for="flexCheckChecked">
+						Checked checkbox
+					</label>
+				</div>
+			</fieldset>
+		</div>
+		<div class="col-10">
+			<div class="row">
+				{% for figurine in figurines %}
+					<div class="card col-4 p-0 me-3 mb-3" style="width: 18rem;">
+						{% for picture in figurine.pictures|slice(0, 1) %}
+							<img src="/uploads/{{ picture.url }}" class="card-img-top img-fluid" alt="...">
+						{% endfor %}
+						<div class="card-body">
+							<h4 class="card-title">{{ figurine.name }}
+								{% if figurine.createAt|date('Y-m-d') == "now"|date('Y-m-d') %}
+									<span class="badge bg-secondary">
+										<i class="bi bi-exclamation-circle"></i>
+									</span>
+								{% endif %}
+							</h4>
+							<h5 class="card-title">
+								<i class="bi bi-person-circle"></i>
+								{{ figurine.owner.username }}</h5>
+							<h6 class="card-title">
+								<i class="bi bi-tag"></i>
+								{{ figurine.category.name }}</h6>
+							<i class="bi bi-calendar4"></i>
+							{{ figurine.createAt ? figurine.createAt|date('Y-m-d') : '' }}
 
-		<p class="card-text">{{ figurine.description }}</p>
+							<p class="card-text">
+								<i class="bi bi-pencil-fill"></i>
+								{{ figurine.description|u.truncate(25, '...') }}</p>
+						</div>
+						<div class="card-body">
+							<a href="{{ path('figurine_upvote', {'id': figurine.id}) }}">
+								<i class="bi bi-hand-thumbs-up"></i>
+							</a>
+							{{ figurine.upvote }}
+
+							<a href="{{ path('figurine_downvote', {'id': figurine.id}) }}">
+								<i class="bi bi-hand-thumbs-down"></i>
+							</a>
+							{{ figurine.downvote }}
+
+							<i class="bi bi-chat-text"></i>
+							{{ figurine.comments|length }}
+						</div>
+						<div class="card-body">
+							<a href="{{ path('figurine_show', {'id': figurine.id}) }}">
+								<i class="bi bi-plus-circle"></i>
+							</a>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
 	</div>
-	<ul class="list-group list-group-flush">
-		<li class="list-group-item">
-			{{ figurine.upvote }}
-			<a href="{{ path('figurine_upvote', {'id': figurine.id}) }}">Vote positif</a>
-		</li>
-		<li class="list-group-item">{{ figurine.downvote }}
-			<a href="{{ path('figurine_downvote', {'id': figurine.id}) }}">Vote négatif</a>
-		</li>
-		<li class="list-group-item">{{ figurine.comments|length }}
-		</li>
-	</ul>
-	<div class="card-body">
-		<a href="{{ path('figurine_show', {'id': figurine.id}) }}">Voir plus</a>
-	</div>
-</div>{% endfor %}{% endblock %}
+{% endblock %}
