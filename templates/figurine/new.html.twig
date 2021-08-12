@@ -5,11 +5,14 @@
 
 {% block body %}
 	<div class="container">
+		<a href="{{ path('figurine_index') }}">
+			<i class="bi bi-arrow-left-short" style="font-size: 2rem"></i>
+		</a>
 		<h1>Publication d'une figurine</h1>
 
 
 		{{ include('figurine/_form.html.twig') }}
 
-		<a href="{{ path('figurine_index') }}">Retour</a>
+
 	</div>
 {% endblock %}
