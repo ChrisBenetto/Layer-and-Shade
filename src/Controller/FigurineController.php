@@ -79,7 +79,7 @@ class FigurineController extends AbstractController
     }
 
     #[Route('/{id}/upvote', name: 'figurine_upvote', methods: ['GET'])]
-    public function upvote(Request $request, FigurineRepository $figurineRepository): Response
+    public function upvote(Request $request, FigurineRepository $figurineRepository, CategoryRepository $categoryRepository): Response
     {
         $figurineId = $request->attributes->get('id');
         $figurine = $figurineRepository->find($figurineId);
@@ -93,11 +93,12 @@ class FigurineController extends AbstractController
 
         return $this->render('figurine/index.html.twig', [
             'figurines' => $figurineRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
         ]);
     }
 
     #[Route('/{id}/downvote', name: 'figurine_downvote', methods: ['GET'])]
-    public function downvote(Request $request, FigurineRepository $figurineRepository): Response
+    public function downvote(Request $request, FigurineRepository $figurineRepository, CategoryRepository $categoryRepository): Response
     {
         $figurineId = $request->attributes->get('id');
         $figurine = $figurineRepository->find($figurineId);
@@ -111,6 +112,7 @@ class FigurineController extends AbstractController
 
         return $this->render('figurine/index.html.twig', [
             'figurines' => $figurineRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
         ]);
     }
 

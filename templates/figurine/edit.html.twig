@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modification d'une publication{% endblock %}
+{% block title %}Modification d'une publication
+{% endblock %}
 
 {% block body %}
-    <h1>Editer la publication</h1>
+	<div class="container">
+		<a href="{{ path('profile') }}">
+			<i class="bi bi-arrow-left-short" style="font-size: 2rem"></i>
+		</a>
+		<h1>Editer la publication</h1>
+		{{ include('figurine/_form.html.twig', {'button_label': 'Modifier'}) }}
+		{{ include('figurine/_delete_form.html.twig', {'button_label': 'Suppression'}) }}
+	</div>
 
-    {{ include('figurine/_form.html.twig', {'button_label': 'Modifier'}) }}
-    {{ include('figurine/_delete_form.html.twig', {'button_label': 'Suppression'}) }}
-    <a href="{{ path('figurine_index') }}">Retour</a>
 
-    
 {% endblock %}
