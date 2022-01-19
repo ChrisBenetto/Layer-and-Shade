@@ -14,14 +14,14 @@ class BlogController extends AbstractController
     #[Route('/', name: 'home')]
     public function home(): Response
     {
-        return $this->render('blog/home.html.twig', [
+        return $this->render('blog/index.html.twig', [
             'controller_name' => 'BlogController',
         ]);
     }
     #[Route('/app', name: 'index')]
     public function index(): Response
     {
-        return $this->render('blog/index.html.twig', [
+        return $this->render('figurine/index.html.twig', [
             'controller_name' => 'BlogController',
         ]);
     }
