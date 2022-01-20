@@ -15,8 +15,17 @@
 		{% endif %}
 		</h1>
 		<h2>Les nouveautés</h2>
+				{% for figurine in figurinesByDate %}
+				<p> {{ figurine.name }} </p>
+				{% endfor %}
 		<h2>Les mieux notées</h2>
+				{% for figurine in figurinesByUpvote %}
+				<p> {{ figurine.name }} </p>
+				{% endfor %}
 		<h2>Les plus commentées</h2>
+				{% for figurine in figurinesMoreComments %}
+				<p> {{ figurine.name }} </p>
+				{% endfor %}
 
 	</div>
 {% endblock %}
