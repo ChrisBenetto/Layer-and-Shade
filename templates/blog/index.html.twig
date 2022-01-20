@@ -14,18 +14,36 @@
 
 		{% endif %}
 		</h1>
+		
 		<h2>Les nouveautés</h2>
+		<div class=" d-flex justify-content-around mt-3 container-fluid">
 				{% for figurine in figurinesByDate %}
-				<p> {{ figurine.name }} </p>
+					<div class="card col-3 p-0 me-3 mb-3" style="width: 18rem;">
+					{% for picture in figurine.pictures|slice(0, 1) %}
+						<img src="/uploads/{{ picture.url }}" class="card-img-top img-fluid" alt="...">
+					{% endfor %}
+					</div>			
 				{% endfor %}
+		</div>
 		<h2>Les mieux notées</h2>
+		<div class=" d-flex justify-content-around mt-3 container-fluid">
 				{% for figurine in figurinesByUpvote %}
-				<p> {{ figurine.name }} </p>
+					<div class="card col-3 p-0 me-3 mb-3" style="width: 18rem;">
+					{% for picture in figurine.pictures|slice(0, 1) %}
+						<img src="/uploads/{{ picture.url }}" class="card-img-top img-fluid" alt="...">
+					{% endfor %}
+					</div>			
 				{% endfor %}
+		</div>
 		<h2>Les plus commentées</h2>
+		<div class=" d-flex justify-content-around mt-3 container-fluid">
 				{% for figurine in figurinesMoreComments %}
-				<p> {{ figurine.name }} </p>
+					<div class="card col-3 p-0 me-3 mb-3" style="width: 18rem;">
+					{% for picture in figurine.pictures|slice(0, 1) %}
+						<img src="/uploads/{{ picture.url }}" class="card-img-top img-fluid" alt="...">
+					{% endfor %}
+					</div>			
 				{% endfor %}
-
+		</div>
 	</div>
 {% endblock %}

@@ -18,9 +18,9 @@ class BlogController extends AbstractController
         return $this->render('blog/index.html.twig', [
             'controller_name' => 'BlogController',
             'figurinesByDate' => $figurineRepository->findBy(
-                [],['create_at' => 'DESC'],1,0),
+                [],['create_at' => 'DESC'],3,0),
             'figurinesByUpvote' => $figurineRepository->findBy(
-                [],['upvote' => 'DESC'],1,0),
+                [],['upvote' => 'DESC'],3,0),
             'figurinesMoreComments' => $figurineRepository->findAll()
         ]);
     }
